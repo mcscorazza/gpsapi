@@ -40,19 +40,17 @@ class api_logic
         
         for($i = 0; $i < count($entries['data']); $i++){
             $params = [
-                ':latitude' => intval($entries['data'][$i]['lt']),
-                ':longitude' => intval($entries['data'][$i]['lg']),
+                ':latitude' => $entries['data'][$i]['lt'],
+                ':longitude' => $entries['data'][$i]['lg'],
                 ':date' => $entries['data'][$i]['dt']
             ];
             
             $db->EXE_NON_QUERY("
-            INSERT INTO ftGPS VALUES (
-                0,
+            INSERT INTO ftGPS (latitude, longitude, date) VALUES (
                 :latitude,
                 :longitude,
-                :date,
+                :date
             )", $params);
-            echo "feito!";
         } 
 
         return [
